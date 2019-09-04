@@ -22,3 +22,28 @@ and does the following:
 import sys
 import calendar
 from datetime import datetime
+
+user_input = input('Enter a month and/or year separated by commas: ').split(',')
+
+current_month = datetime.now().strftime("%m")
+current_year = datetime.now().strftime("%Y")
+
+def display_calendar(m = current_month, y = current_year):
+  def cal_print(year, month):
+    print(calendar.TextCalendar(calendar.SUNDAY).formatmonth(int(year), int(month)))
+  if user_input[0] == '':
+    cal_print(y, m)
+  elif int(user_input[0]) <= 12:
+    if len(user_input) == 2:
+      m = user_input[0]
+      y = user_input[1]
+    else:
+      m = user_input[0]
+    cal_print(y, m)
+  elif len(user_input[0]) == 4:
+    y = user_input[0]
+    cal_print(y, m) 
+  else:
+    print('In order to print calendar you must submit a month and year both digits and separated by a comma, ex. 10, 2010')
+
+display_calendar()
